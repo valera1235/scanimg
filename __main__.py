@@ -20,3 +20,4 @@ if __name__ == "__main__": # выполняем при запуске именн
     #logging.basicConfig(level=logging.INFO) # запуск логгирования
     #asyncio.run(main()) # асинхронный запуск главной процедуры
     print("Hi!")
+    print("We started this project!")
