@@ -19,4 +19,4 @@ async def main(): # главная процедура
 if __name__ == "__main__": # выполняем при запуске именно этого файла
     #logging.basicConfig(level=logging.INFO) # запуск логгирования
     #asyncio.run(main()) # асинхронный запуск главной процедуры
-    print("We started this project!!!")
+    print("We started this project!")
