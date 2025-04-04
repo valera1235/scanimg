@@ -1,4 +1,4 @@
-# команда Валерий Мацан, Виктор Плишкин
+# команда Валерий Мацан, Виктор Плишкин, Глеб Савелов
 import asyncio # импорт модуля для асинхронного запуска бота Подробнее https://habr.com/ru/companies/wunderfund/articles/700474/
 import logging # импорт модуля для настройки логгирования, которое поможет в отладке Подробнее https://habr.com/ru/companies/wunderfund/articles/683880/
 
