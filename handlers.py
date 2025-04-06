@@ -36,6 +36,15 @@ async def start_handler(msg: Message):
 async def menu(msg: Message):
     await msg.answer("Главное меню", reply_markup=mainmenu)
 
+
+@router.message(F.work_with_photo)
+async def echo_photo_message(message: Message, state: FSMContext):
+    if message.photo:
+        file_name = f"photos/{message.photo[-1].file_id}.jpg"
+        await bot.download(message.photo[-1], destination=file_name)
+        print (file_name)
+
+
 @router.callback_query(F.data == "sendimg")
 async def myoption(callback: CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
@@ -59,6 +68,20 @@ async def setgroup(callback: CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
     chat_group_dict[chat_id]=group
     await callback.message.answer("Вы выбрали группу "+group, reply_markup=mainmenu)
+
+#@dp.message_handler(content_types=ContentType.PHOTO)
+#async def process_photo(message: types.Message):
+    # Получаем список фотографий в сообщении
+    #photos = message.photo
+
+    # Перебираем фотографии и обрабатываем их
+    #for photo in photos:
+        # Скачиваем фотографию
+        #await photo.download()
+        # Обрабатываем фотографию (например, сохраняем ее в базу данных)
+        #process_photo(photo.file)
+        #print (photo)
+
 
 @router.message(F.text)
 async def message_with_text(msg: Message):
