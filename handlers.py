@@ -63,20 +63,6 @@ async def setgroup(callback: CallbackQuery, state: FSMContext):
     chat_group_dict[chat_id]=group
     await callback.message.answer("Вы выбрали группу "+group, reply_markup=mainmenu)
 
-#@dp.message_handler(content_types=ContentType.PHOTO)
-#async def process_photo(message: types.Message):
-    # Получаем список фотографий в сообщении
-    #photos = message.photo
-
-    # Перебираем фотографии и обрабатываем их
-    #for photo in photos:
-        # Скачиваем фотографию
-        #await photo.download()
-        # Обрабатываем фотографию (например, сохраняем ее в базу данных)
-        #process_photo(photo.file)
-        #print (photo)
-
-
 @router.message(F.text)
 async def message_with_text(msg: Message):
     await msg.answer("Главное меню", reply_markup=mainmenu)
