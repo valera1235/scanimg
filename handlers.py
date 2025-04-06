@@ -44,6 +44,8 @@ async def handle_photo_message(message: Message, state: FSMContext):
         #await bot.download(message.photo[-1], destination=file_name)
         photo_data = message.photo[-1]
         await message.answer(f'{photo_data}')
+        await message.answer_photo(photo_data.file_id)
+        await message.answer("Фото загружено!")
         print (file_name)
 
 
