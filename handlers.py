@@ -46,14 +46,7 @@ async def sendimg(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == "myoption")
 async def myoption(callback: CallbackQuery, state: FSMContext):
-    await callback.message.answer("Выберите номер Вашей группы", reply_markup=group_buttons)
-
-@router.callback_query(F.data.startswith("setgroup"))
-async def setgroup(callback: CallbackQuery, state: FSMContext):
-    group = callback.data.split('-')[1]
-    chat_id = callback.message.chat.id
-    chat_group_dict[chat_id]=group
-    await callback.message.answer("Вы выбрали группу "+group, reply_markup=mainmenu)
+    await callback.message.answer("Настройка бота")
 
 @router.message(F.text)
 async def message_with_text(msg: Message):
