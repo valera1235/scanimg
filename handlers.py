@@ -37,11 +37,13 @@ async def menu(msg: Message):
     await msg.answer("Главное меню", reply_markup=mainmenu)
 
 
-@router.message(F.work_with_photo)
-async def echo_photo_message(message: Message, state: FSMContext):
+@router.message(F.photo)
+async def handle_photo_message(message: Message, state: FSMContext):
     if message.photo:
         file_name = f"photos/{message.photo[-1].file_id}.jpg"
-        await bot.download(message.photo[-1], destination=file_name)
+        #await bot.download(message.photo[-1], destination=file_name)
+        photo_data = message.photo[-1]
+        await message.answer(f'{photo_data}')
         print (file_name)
 
 
