@@ -40,17 +40,9 @@ async def handle_photo_message(message: Message, state: FSMContext):
 
 
 @router.callback_query(F.data == "sendimg")
-async def myoption(callback: CallbackQuery, state: FSMContext):
+async def sendimg(callback: CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
-    if chat_id in chat_group_dict:
-        group=chat_group_dict[chat_id]
-        fp = urllib.request.urlopen("http://alcol.deltabest.ru/shedule/api/forgroup/?group="+group)
-        mybytes = fp.read()
-        shedule_html = mybytes.decode("utf8")
-        fp.close()
-        await callback.message.answer(shedule_html[0:1000], reply_markup=mainmenu)
-    else:
-        await callback.message.answer("Выберите номер Вашей группы", reply_markup=group_buttons)
+    await callback.message.answer("Отправьте изображение, которое необходимо распознать")
 
 @router.callback_query(F.data == "myoption")
 async def myoption(callback: CallbackQuery, state: FSMContext):
