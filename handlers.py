@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 
 import urllib.request
 
-mainmenu = [ [InlineKeyboardButton(text="Моё расписание",callback_data="myshedule"), InlineKeyboardButton(text="Настройка",callback_data="myoption")] ] # кнопки главного меню
+mainmenu = [ [InlineKeyboardButton(text="Отправить изображение",callback_data="sendimg"), InlineKeyboardButton(text="Настройка",callback_data="myoption")] ] # кнопки главного меню
 mainmenu = InlineKeyboardMarkup(inline_keyboard=mainmenu)
 exit_kb = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="Выйти в меню")]], resize_keyboard=True)
 
@@ -27,7 +27,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def start_handler(msg: Message):
-    greet = "Привет, {name}, я бот, предоставляющий текущее расписание занятий в Алексеевском колледже️"
+    greet = "Привет, {name}, я бот, который САМОСТОЯТЕЛЬНО распознает изображения!"
     await msg.answer(greet.format(name=msg.from_user.full_name), reply_markup=mainmenu)
 
 @router.message(F.text == "/menu")
@@ -36,7 +36,7 @@ async def start_handler(msg: Message):
 async def menu(msg: Message):
     await msg.answer("Главное меню", reply_markup=mainmenu)
 
-@router.callback_query(F.data == "myshedule")
+@router.callback_query(F.data == "sendimg")
 async def myoption(callback: CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
     if chat_id in chat_group_dict:
