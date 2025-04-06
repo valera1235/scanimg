@@ -13,16 +13,6 @@ exit_kb = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="Выйти в ме
 
 chat_group_dict={} # словарь привязки чата и номера группы
 
-groups_nums=[['111','121','131','141','211','221','231'],['241','311','321','331','341','411','421'],['511','521','531','611','621','631','741'],
-['811','821','822','831','911','921','931'],['1011','1021','1031','1041','1121','1131'],['1211','1221','1231','1241','1311','1411']]
-group_buttons=[]
-for group_row in groups_nums:
-    group_buttons_row=[]
-    for num in group_row:
-        group_buttons_row.append(InlineKeyboardButton(text=num, callback_data="setgroup-"+num))
-    group_buttons.append(group_buttons_row)
-group_buttons = InlineKeyboardMarkup(inline_keyboard=group_buttons)
-
 router = Router()
 
 @router.message(Command("start"))
