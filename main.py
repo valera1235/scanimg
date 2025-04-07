@@ -1,6 +1,6 @@
 # команда Валерий Мацан, Виктор Плишкин, Глеб Савелов, Илья Потемкин, Егор Мальцев
 import asyncio # импорт модуля для асинхронного запуска бота Подробнее https://habr.com/ru/companies/wunderfund/articles/700474/
-import logging # импорт модуля для настройки логгирования, которое поможет в отладке Подробнее https://habr.com/ru/companies/wunderfund/articles/683880/
+import logging # импорт модуля для настройки логирования, которое поможет в отладке Подробнее https://habr.com/ru/companies/wunderfund/articles/683880/
 
 from aiogram import Bot, Dispatcher # основной модуль библиотеки aiogram, из которого мы импортируем классы Bot и Dispatcher Подробнее https://mastergroosha.github.io/aiogram-3-guide/quickstart/
 from aiogram.fsm.storage.memory import MemoryStorage # хранилища данных для состояний пользователей
