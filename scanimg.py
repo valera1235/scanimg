@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 model = VGG16(weights='imagenet')
 
 # Загрузка и предобработка изображения
-image = load_img('path_to_image.jpg', target_size=(224, 224))
+image = load_img('tmp.jpg', target_size=(224, 224))
 image = img_to_array(image)
 image = np.expand_dims(image, axis=0)
 image = preprocess_input(image)
