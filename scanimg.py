@@ -1,27 +1,17 @@
-import cv2
-import numpy as np
-from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions
-from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications import VGG16
+from tensorflow.keras.applications.vgg16 import preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
 
+# Загрузка предобученной модели
+model = VGG16(weights='imagenet')
 
-def recognize_number_with_vgg16(image_path):
-    # Загружаем предобученную модель VGG16
-    model = VGG16(weights='imagenet')
+# Загрузка и предобработка изображения
+image = load_img('tmp.jpg', target_size=(224, 224))
+image = img_to_array(image)
+image = np.expand_dims(image, axis=0)
+image = preprocess_input(image)
 
-    # Загружаем и подготавливаем изображение
-    img = image.load_img(image_path, target_size=(224, 224))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
-
-    # Делаем предсказание
-    preds = model.predict(x)
-
-    # Декодируем и выводим топ-3 предсказания
-    decoded_preds = decode_predictions(preds, top=3)[0]
-
-    print("Предсказания VGG16:")
-    for i, (imagenet_id, label, score) in enumerate(decoded_preds):
-        print(f"{i + 1}: {label} ({score:.2f})")
-
-    return decoded_preds
+# Классификация изображения
+predictions = model.predict(image)
+label = decode_predictions(predictions)
+print(label)
