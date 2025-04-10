@@ -37,6 +37,7 @@ async def handle_photo_message(message: Message, state: FSMContext):
         #await message.answer_photo(photo_data.file_id)
         await message.answer("Изображение загружено!")
         print (file_name)
+        #recognize_number_with_vgg16(image_path)
 
 
 @router.callback_query(F.data == "sendimg")
