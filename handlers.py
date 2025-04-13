@@ -6,7 +6,8 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardBu
 from aiogram.types import Message
 from aiogram.types.callback_query import CallbackQuery
 from config import TOKEN
-#from scanimg import recognize_number_with_vgg16
+from scanimg import recognize_number_with_vgg16
+from easyocr import recognize_numbers_with_easyocr
 
 mainmenu = [ [InlineKeyboardButton(text="Отправить изображение",callback_data="sendimg"), InlineKeyboardButton(text="Настройка",callback_data="myoption")] ] # кнопки главного меню
 mainmenu = InlineKeyboardMarkup(inline_keyboard=mainmenu)
@@ -40,8 +41,9 @@ async def handle_photo_message(message: Message, state: FSMContext):
         await message.answer("Изображение загружено!")
         image_path =  "https://api.telegram.org/file/bot" + TOKEN + "/"+file.file_path
         await message.answer(image_path)
-        #recognize_number_with_vgg16(f'{photo_data}') https://api.telegram.org/file/bot".$token."/".$file_path
-
+        #answer = recognize_number_with_vgg16(image_path)
+        #answer = recognize_numbers_with_easyocr(image_path)
+        await message.answer(answer)
 
 @router.callback_query(F.data == "sendimg")
 async def sendimg(callback: CallbackQuery, state: FSMContext):
