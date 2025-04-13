@@ -35,12 +35,9 @@ async def handle_photo_message(message: Message, state: FSMContext):
         #await bot.download(message.photo[-1], destination=file_name)
         photo_data = message.photo[-1]
         await message.answer(f'{photo_data}')
-        #await message.answer_photo(photo_data.file_id)
         bot = Bot(token=TOKEN)
         file = await bot.get_file(message.photo[-1].file_id)
         await message.answer("Изображение загружено!")
-        #image_path = "https://api.telegram.org/bot"+TOKEN+"/getFile?file_id="+message.photo[-1].file_id
-        #image_path = "https://api.telegram.org/file/bot" + TOKEN + "/file.jpg"
         image_path =  "https://api.telegram.org/file/bot" + TOKEN + "/"+file.file_path
         await message.answer(image_path)
         #recognize_number_with_vgg16(f'{photo_data}') https://api.telegram.org/file/bot".$token."/".$file_path
