@@ -42,7 +42,7 @@ async def handle_photo_message(message: Message, state: FSMContext):
         image_path =  "https://api.telegram.org/file/bot" + TOKEN + "/"+file.file_path
         await message.answer(image_path)
         #answer = recognize_number_with_vgg16(image_path)
-        #answer = recognize_numbers_with_easyocr(image_path)
+        answer = recognize_numbers_with_easyocr(image_path)
         await message.answer(answer)
 
 @router.callback_query(F.data == "sendimg")
