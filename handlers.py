@@ -1,11 +1,12 @@
-from aiogram import F, Router, types
+from aiogram import F, Router
+from aiogram import Bot
 from aiogram.filters import Command
-from aiogram.types import Message
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
-from aiogram.types.callback_query import CallbackQuery
 from aiogram.fsm.context import FSMContext
-
-import urllib.request
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import Message
+from aiogram.types.callback_query import CallbackQuery
+from config import TOKEN
+#from scanimg import recognize_number_with_vgg16
 
 mainmenu = [ [InlineKeyboardButton(text="Отправить изображение",callback_data="sendimg"), InlineKeyboardButton(text="Настройка",callback_data="myoption")] ] # кнопки главного меню
 mainmenu = InlineKeyboardMarkup(inline_keyboard=mainmenu)
@@ -35,9 +36,14 @@ async def handle_photo_message(message: Message, state: FSMContext):
         photo_data = message.photo[-1]
         await message.answer(f'{photo_data}')
         #await message.answer_photo(photo_data.file_id)
+        bot = Bot(token=TOKEN)
+        file = await bot.get_file(message.photo[-1].file_id)
         await message.answer("Изображение загружено!")
-        print (file_name)
-        #recognize_number_with_vgg16(image_path)
+        #image_path = "https://api.telegram.org/bot"+TOKEN+"/getFile?file_id="+message.photo[-1].file_id
+        #image_path = "https://api.telegram.org/file/bot" + TOKEN + "/file.jpg"
+        image_path =  "https://api.telegram.org/file/bot" + TOKEN + "/"+file.file_path
+        await message.answer(image_path)
+        #recognize_number_with_vgg16(f'{photo_data}') https://api.telegram.org/file/bot".$token."/".$file_path
 
 
 @router.callback_query(F.data == "sendimg")
